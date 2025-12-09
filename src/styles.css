@@ -1,0 +1,207 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom scrollbar */
+@layer utilities {
+  .scrollbar-thin {
+    scrollbar-width: thin;
+    scrollbar-color: theme('colors.gray.400') transparent;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background-color: theme('colors.gray.400');
+    border-radius: 3px;
+  }
+
+  .dark .scrollbar-thin {
+    scrollbar-color: theme('colors.gray.600') transparent;
+  }
+
+  .dark .scrollbar-thin::-webkit-scrollbar-thumb {
+    background-color: theme('colors.gray.600');
+  }
+}
+
+/* Package type badges */
+@layer components {
+  .badge {
+    @apply inline-flex items-center px-2 py-0.5 rounded text-xs font-medium;
+  }
+
+  .badge-npm {
+    @apply bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400;
+  }
+
+  .badge-pypi {
+    @apply bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400;
+  }
+
+  .badge-nuget {
+    @apply bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-400;
+  }
+
+  .badge-oci {
+    @apply bg-cyan-100 text-cyan-800 dark:bg-cyan-900/30 dark:text-cyan-400;
+  }
+
+  .badge-mcpb {
+    @apply bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-400;
+  }
+
+  .badge-remote {
+    @apply bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400;
+  }
+
+  .badge-deprecated {
+    @apply bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300;
+  }
+}
+
+/* Card styles */
+@layer components {
+  .server-card {
+    @apply bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700
+           hover:shadow-md hover:border-primary-300 dark:hover:border-primary-600
+           transition-all duration-200 overflow-hidden;
+  }
+
+  .server-card-header {
+    @apply p-4 border-b border-gray-100 dark:border-gray-700;
+  }
+
+  .server-card-body {
+    @apply p-4;
+  }
+
+  .server-card-footer {
+    @apply px-4 py-3 bg-gray-50 dark:bg-gray-800/50 border-t border-gray-100 dark:border-gray-700;
+  }
+}
+
+/* Form controls */
+@layer components {
+  .form-input {
+    @apply block w-full rounded-lg border border-gray-300 dark:border-gray-600
+           bg-white dark:bg-gray-700 px-4 py-2
+           text-gray-900 dark:text-gray-100
+           placeholder-gray-400 dark:placeholder-gray-500
+           focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20
+           focus:outline-none transition-colors;
+  }
+
+  .form-select {
+    @apply form-input appearance-none bg-no-repeat pr-10;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+    background-position: right 0.5rem center;
+    background-size: 1.5em 1.5em;
+  }
+
+  .form-checkbox {
+    @apply rounded border-gray-300 dark:border-gray-600
+           text-primary-600
+           focus:ring-primary-500 focus:ring-offset-0
+           bg-white dark:bg-gray-700;
+  }
+}
+
+/* Button styles */
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center px-4 py-2 rounded-lg font-medium
+           transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2;
+  }
+
+  .btn-primary {
+    @apply btn bg-primary-600 text-white hover:bg-primary-700
+           focus:ring-primary-500;
+  }
+
+  .btn-secondary {
+    @apply btn bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-200
+           hover:bg-gray-200 dark:hover:bg-gray-600
+           focus:ring-gray-500;
+  }
+}
+
+/* Stat display */
+@layer components {
+  .stat {
+    @apply flex items-center gap-1 text-sm text-gray-500 dark:text-gray-400;
+  }
+
+  .stat-icon {
+    @apply w-4 h-4;
+  }
+}
+
+/* Filter chip */
+@layer components {
+  .filter-chip {
+    @apply inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-medium
+           border cursor-pointer transition-colors;
+  }
+
+  .filter-chip-inactive {
+    @apply filter-chip border-gray-300 dark:border-gray-600
+           text-gray-600 dark:text-gray-400
+           hover:border-gray-400 dark:hover:border-gray-500
+           hover:bg-gray-50 dark:hover:bg-gray-800;
+  }
+
+  .filter-chip-active {
+    @apply filter-chip border-primary-500 bg-primary-50 dark:bg-primary-900/30
+           text-primary-700 dark:text-primary-300;
+  }
+}
+
+/* Pagination */
+@layer components {
+  .pagination-btn {
+    @apply px-3 py-2 rounded-lg text-sm font-medium transition-colors
+           border border-gray-300 dark:border-gray-600
+           text-gray-700 dark:text-gray-300
+           hover:bg-gray-50 dark:hover:bg-gray-800
+           disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-transparent;
+  }
+
+  .pagination-btn-active {
+    @apply pagination-btn bg-primary-600 text-white border-primary-600
+           hover:bg-primary-700 dark:hover:bg-primary-500;
+  }
+}
+
+/* Animations */
+@layer utilities {
+  .animate-fade-in {
+    animation: fadeIn 0.2s ease-out;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(4px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+/* Focus visible for keyboard navigation */
+@layer utilities {
+  .focus-visible-ring {
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500
+           focus-visible:ring-offset-2 dark:focus-visible:ring-offset-gray-900;
+  }
+}

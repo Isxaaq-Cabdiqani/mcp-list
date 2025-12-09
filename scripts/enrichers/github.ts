@@ -22,15 +22,36 @@ interface GitHubRepoResponse {
 }
 
 /**
+ * Validate that a URL is a legitimate GitHub URL by checking the hostname.
+ * This prevents URL substring bypass attacks (CWE-20) where "github.com"
+ * could appear in the path or query string of a malicious URL.
+ */
+function isGitHubUrl(url: string): boolean {
+  // Handle SSH URLs: git@github.com:owner/repo.git
+  if (url.startsWith("git@github.com:")) {
+    return true;
+  }
+
+  try {
+    const parsed = new URL(url);
+    // Hostname must be exactly "github.com" - not a subdomain or embedded
+    return parsed.hostname === "github.com";
+  } catch {
+    return false;
+  }
+}
+
+/**
  * Parse GitHub repository URL to extract owner and repo name
  */
 function parseGitHubUrl(
   url: string
 ): { owner: string; repo: string } | null {
   // Handle various GitHub URL formats
+  // Patterns are anchored with ^ to prevent path injection attacks
   const patterns = [
-    /github\.com\/([^/]+)\/([^/]+?)(?:\.git)?(?:\/|$)/,
-    /github\.com:([^/]+)\/([^/]+?)(?:\.git)?$/,
+    /^https?:\/\/github\.com\/([^/]+)\/([^/]+?)(?:\.git)?(?:\/|$)/,
+    /^git@github\.com:([^/]+)\/([^/]+?)(?:\.git)?$/,
   ];
 
   for (const pattern of patterns) {
@@ -96,7 +117,7 @@ export async function enrichGitHub(
 ): Promise<{ github: GitHubEnrichment } | null> {
   // Check if server has a GitHub repository
   const repoUrl = server.repository?.url;
-  if (!repoUrl || !repoUrl.includes("github.com")) {
+  if (!repoUrl || !isGitHubUrl(repoUrl)) {
     return null;
   }
 

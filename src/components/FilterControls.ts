@@ -155,15 +155,4 @@ export function createFilterControls(options: FilterControlsOptions): HTMLElemen
   return container;
 }
 
-/**
- * Update filter controls state programmatically
- */
-export function updateFilterControlsState(
-  _container: HTMLElement,
-  packageTypes: RegistryType[],
-  hasRemote: boolean | null
-): void {
-  // This would need to be implemented if we want to sync state from URL
-  // For now, the component manages its own state
-  console.log("updateFilterControlsState", { packageTypes, hasRemote });
-}
+

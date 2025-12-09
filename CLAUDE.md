@@ -199,6 +199,32 @@ grep "\[npm\]" sync.log
 **Required Secrets:**
 - `GITHUB_TOKEN` - Automatically provided by GitHub Actions (used for API calls)
 
+## Security
+
+See [SECURITY.md](SECURITY.md) for the full security policy and vulnerability reporting process.
+
+**Security Measures in Place:**
+
+| Category | Measure |
+|----------|---------|
+| Supply Chain | GitHub Actions pinned to commit SHAs |
+| Supply Chain | Dependabot for automated dependency updates |
+| Supply Chain | `npm ci` for reproducible builds |
+| Code Analysis | CodeQL security scanning on push/PR/weekly |
+| CI/CD | Minimal workflow permissions (principle of least privilege) |
+| CI/CD | Workflow timeout limits |
+| Data | All data sourced from official registries only |
+
+**Security-Related Files:**
+- `SECURITY.md` - Security policy and vulnerability reporting
+- `.github/dependabot.yml` - Automated dependency updates
+- `.github/workflows/codeql.yml` - CodeQL security analysis
+
+**Manual Configuration Required:**
+- Enable GitHub Private Vulnerability Reporting in repository settings
+- Configure branch protection rules for `main` branch
+- Enable Dependabot security alerts in repository settings
+
 ## Frontend Development
 
 The frontend is intentionally simple - vanilla TypeScript without frameworks. Search and filtering are implemented client-side using the preloaded `servers.json` data.
